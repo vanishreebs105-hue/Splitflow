@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-[#F7F8F5] text-[#1A1A1A] font-sans antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-stone-300 rounded-full hover:bg-stone-400;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-brand {
+    @apply btn bg-[#4A5D3A] text-white hover:bg-[#3D4C30] focus:ring-[#4A5D3A] shadow-sm hover:shadow-md active:scale-[0.98];
+  }
+  .btn-secondary {
+    @apply btn bg-white text-stone-700 border border-stone-200 hover:bg-stone-50 hover:border-stone-300 hover:shadow-sm focus:ring-stone-400 active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply btn bg-transparent text-stone-600 hover:bg-stone-100 hover:text-stone-900;
+  }
+
+  .input {
+    @apply w-full px-3.5 py-2.5 rounded-lg border border-stone-200 bg-white text-stone-900 placeholder-stone-400 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#4A5D3A]/15 focus:border-[#4A5D3A];
+  }
+
+  .card {
+    @apply bg-white rounded-xl border border-stone-200/70 transition-all duration-200;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.03), 0 1px 3px 0 rgb(0 0 0 / 0.04);
+  }
+  .card:hover {
+    box-shadow: 0 8px 20px -4px rgb(0 0 0 / 0.08), 0 2px 6px -1px rgb(0 0 0 / 0.04);
+    border-color: rgb(0 0 0 / 0.08);
+  }
+
+  .label {
+    @apply block text-sm font-medium text-stone-700 mb-1.5;
+  }
+
+  .nav-link {
+    @apply px-3 py-2 rounded-lg text-sm font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-100 transition-colors;
+  }
+}
+
+/* ========== SMOOTH PANEL SWAP ========== */
+
+.auth-panel-left,
+.auth-panel-right {
+  transition:
+    background-color 1400ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 1400ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color, transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.auth-panel-left {
+  background-color: #4A5D3A;
+  transform-origin: right center;
+}
+
+.auth-panel-right {
+  background-color: #F7F8F5;
+  transform-origin: left center;
+}
+
+.auth-swapped .auth-panel-left {
+  background-color: #F7F8F5;
+  transform: scale(1.008);
+}
+
+.auth-swapped .auth-panel-right {
+  background-color: #4A5D3A;
+  transform: scale(0.992);
+}
+
+.auth-text-on-dark,
+.auth-text-on-light,
+.auth-text-muted,
+.auth-logo-box {
+  transition: color 1400ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 1400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.auth-text-on-dark {
+  color: #ffffff;
+}
+.auth-swapped .auth-text-on-dark {
+  color: #1A1A1A;
+}
+
+.auth-text-on-light {
+  color: #1A1A1A;
+}
+.auth-swapped .auth-text-on-light {
+  color: #ffffff;
+}
+
+.auth-text-muted {
+  color: rgba(255, 255, 255, 0.65);
+}
+.auth-swapped .auth-text-muted {
+  color: #6B7280;
+}
+
+/* ========== 3D CARD HOVER ========== */
+.card-3d {
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 300ms ease;
+  transform-style: preserve-3d;
+}
+.card-3d:hover {
+  transform: translateY(-3px) scale(1.005);
+}
+
+/* ========== PULSE DOT (notifications) ========== */
+@keyframes pulse-dot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.7;
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* ========== SMOOTH DROPDOWN ========== */
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.dropdown-enter {
+  animation: dropdown-in 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
